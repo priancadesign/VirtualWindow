@@ -25,3 +25,4 @@ First, there was a loop created to recognise if the hand was left or right:
 <img src="images/Img4.jpg" alt="Image 4"/>
 
 
+We hope that everyone will have an enjoyable experience using our Virtual Window! Here's a link to the Video: https://www.youtube.com/watch?v=JYHSoRM1TNE
