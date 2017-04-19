@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Window</title>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/reset.css">
+  <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <!--<script src="http://js.leapmotion.com/leap-plugins-0.1.12.js"></script>-->
+  <script src="../leap-0.6.4.js"></script>
+
+
+  <!--<script src="js/trial.js"></script>-->
+  <script>
+  $(document).ready(function() {
+    window.controller = new Leap.Controller({enableGestures: true});
+    var swiper = controller.gesture('swipe');
+    var screenTap = controller.gesture('screenTap');
+    var tolerance = 50;
+    var cooloff = 300;
+    var x = 2, y = 2;
+    var videoArray =['video1','video2','video3','video4', 'video5'];
+
+    Leap.loop(window.controller, function(frame){
+
+      if(frame.hands.length > 0){
+        var hand = frame.hands[0];
+        var position = hand.palmPosition;
+        var velocity = hand.palmVelocity;
+        var direction = hand.direction;
+        var type = hand.type;
+        var timeVisible = hand.timeVisible;
+        var pitchRadians = hand.pitch();
+        var yaw = hand.yaw();
+        var roll = hand.roll();
+
+
+        //IF RIGHT
+        if(type == "right"){
+          //open wall
+          if(position[0]>0){
+            $('#wallLeft').css({"animation-name":"windowOpenLeft","animation-duration": "3s"});
+            $('#wallRight').css({"animation-name":"windowOpenRight","animation-duration": "3s"});
+            document.getElementById('video5_in').play();
+            if(position[0]>200){
+              $('#wallLeft').css({"display":"none"});
+              $('#wallRight').css({"display":"none"});
+            }
+          }
+        }//end of if right open wall
+
+        //IF LEFT
+        if(type == "left"){
+          //close wall
+          if(position[0]<-200){
+            $('#wallLeft').css({"display":"block","animation-name":"windowCloseLeft","animation-duration": "3s"});
+            $('#wallRight').css({"display":"block","animation-name":"windowCloseRight","animation-duration": "3s"});
+            if(position[0]>0){
+              $('#wallLeft').css({"display":"block"});
+              $('#wallRight').css({"display":"block"});
+            }
+          }
+        }//end of if left
+        
+        
+  
+
+      if(type == "right"){
+        if (frame.gestures.length > 0) {
+          for (var i = 0; i < frame.gestures.length; i++) {
+            var gesture = frame.gestures[i];
+            var duration = gesture.duration;
+            if(gesture.type == "swipe") {
+                //Classify swipe as either horizontal or vertical
+                var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
+                //Classify as right-left or up-down
+                if(isHorizontal){
+                    if(gesture.direction[0] > 0){
+                        swipeDirection = "right";
+                        $('#video1').css("display","none");
+                        $('#video2').css("display","none");
+                        $('#video3').css("display","none");
+                        $('#video4').css("display","block");
+                        $('#video5').css("display","none");
+                        document.getElementById('video1_in').pause();
+                        document.getElementById('video2_in').pause();
+                        document.getElementById('video3_in').pause();
+                        document.getElementById('audio3').pause();
+                        document.getElementById('video4_in').play();
+                        document.getElementById('audio4').play();
+                        document.getElementById('video5_in').pause();
+                    } else {
+                        swipeDirection = "left";
+                        $('#video1').css("display","block");
+                        $('#video2').css("display","none");
+                        $('#video3').css("display","none");
+                        $('#video4').css("display","none");
+                        $('#video5').css("display","none");
+                        document.getElementById('video1_in').play();
+                        document.getElementById('video2_in').pause();
+                        document.getElementById('video3_in').pause();
+                        document.getElementById('audio3').pause();
+                        document.getElementById('video4_in').pause();
+                        document.getElementById('audio4').pause();
+                        document.getElementById('video5_in').pause();
+                    }
+                } else { //vertical
+                    if(gesture.direction[1] > 0){
+                        swipeDirection = "up";
+                        //var rand= Math.random(videoArray.length-4, videoArray.length-1);
+                        $('#video1').css("display","none");
+                        $('#video2').css("display","block");
+                        $('#video3').css("display","none");
+                        $('#video4').css("display","none");
+                        $('#video5').css("display","none");
+                        document.getElementById('video1_in').pause();
+                        document.getElementById('video2_in').play();
+                        document.getElementById('video3_in').pause();
+                        document.getElementById('audio3').pause();
+                        document.getElementById('video4_in').pause();
+                        document.getElementById('audio4').pause();
+                        document.getElementById('video5_in').pause();
+                    } else {
+                        swipeDirection = "down";
+                        $('#video1').css("display","none");
+                        $('#video2').css("display","none");
+                        $('#video3').css("display","block");
+                        $('#video4').css("display","none");
+                        $('#video5').css("display","none");
+                        document.getElementById('video1_in').pause();
+                        document.getElementById('video2_in').pause();
+                        document.getElementById('video3_in').play();
+                        document.getElementById('audio3').play();
+                        document.getElementById('video4_in').pause();
+                        document.getElementById('audio4').pause();
+                        document.getElementById('video5_in').pause();
+                    }                  
+                }
+                console.log(swipeDirection)
+             }
+          }//end of for loop
+           
+        }
+      }//end of if type=right
+    }//end of if frame hands
+
+    });
+
+  })//end of ready function
+  </script>
+</head>
+<body>
+  	<div id="container">
+	  	<div id="wallLeft">
+	  	</div>
+	  	<div id="wallRight">
+	  	</div>
+	    <div class = "window">
+	    	<img src="../images/window.png" style="width:469px; height:197px;"/>
+	    </div><!--end of window--> 
+	    
+	      <div id="video1" style="display:none">
+	      	<video id="video1_in" width="320" height="240" loop>
+    			  <source id="video1_in" src="images/aurora.mp4" type="video/mp4">
+    			</video>
+	      </div>
+	      <div id="video2" style="display:none">
+	      	<video id="video2_in" width="320" height="240" loop>
+    			  <source src="images/waterfall.mp4" type="video/mp4">
+    			</video>
+	      </div>
+	      <div id="video3" style="display:none">
+	      	<video id="video3_in" width="320" height="240" loop>
+    			  <source src="images/ocean.mp4" type="video/mp4">
+    			</video>
+          <audio id="audio3">
+            <source src='images/ocean.mp3' type="audio/mp3">
+          </audio>
+	      </div>
+	      <div id="video4" style="display:none">
+	      	<video id="video4_in" width="320" height="240" loop>
+    			  <source src="images/mountains.mov" type="video/mp4">            
+    			</video>
+          <audio id="audio4">
+            <source src='images/mountains.mp3' type="audio/mp3">
+          </audio>
+	      </div>
+	      <div id="video5">
+	      	<video id="video5_in" width="320" height="240" loop>
+    			  <source src="images/fields.mov" type="video/mp4">
+    			</video>
+	      </div> 
+
+	     
+	</div><!--end of container-->
+
+  
+
+</body>
+</html>

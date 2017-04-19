@@ -1,0 +1,166 @@
+
+#container{
+  
+  width: 100%;
+  display:flex;
+  margin:auto;
+  overflow-x: hidden ;
+}
+
+#wallLeft{
+  background:#fff;
+  opacity:1;
+  position:absolute;
+  z-index:1;
+  width:50%;
+  height:100%;
+  top:0;
+  left:0;
+}
+
+#wallRight{
+  background:#fff;
+  opacity:1;
+  position:absolute;
+  z-index:1;
+  width:50%;
+  height:100%;
+  top:0;
+  right:0;
+}
+
+
+.window{
+  z-index:0;
+  width: 100%;
+  margin:125px auto;
+  position:absolute;
+  left:450px;    
+}
+
+@media (min-width: 1200px){
+  .window{
+    z-index:0;
+    width: 100%;
+    margin:125px auto;
+    position:absolute;
+    left:727px;    
+  }
+}
+
+#video1, #video2, #video3, #video4, #video5{
+  display:block;
+  z-index:-1;
+  margin:100px auto;
+}
+
+
+.changeVideo{
+  animation-name: changeVideo;
+  -webkit-animation-name: changeVideo;  
+
+  animation-duration: 1s; 
+  -webkit-animation-duration: 1s;
+
+  animation-timing-function: ease;  
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;
+}
+
+@keyframes changeVideo{
+  0% {
+    transform: scaleX(0.1);
+    opacity:0.2;
+  }     
+  100% {
+    transform: scaleX(1);
+    opacity:1;
+  }
+}
+
+
+.windowOpenLeft{
+  animation-name: windowOpenLeft;
+  -webkit-animation-name: windowOpenLeft;  
+
+  animation-duration: 3s; 
+  -webkit-animation-duration: 3s;
+
+  animation-timing-function: ease;  
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;
+}
+
+.windowOpenRight{
+  animation-name: windowOpenRight;
+  -webkit-animation-name: windowOpenRight;  
+
+  animation-duration: 3s; 
+  -webkit-animation-duration: 3s;
+
+  animation-timing-function: ease;  
+  -webkit-animation-timing-function: ease;
+
+  visibility: visible !important;
+}
+
+@keyframes windowOpenLeft {
+  0% {
+    transform: translateX(0%);
+  }     
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes windowCloseLeft {
+  0% {
+    transform: translateX(-100%);
+  }     
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes windowOpenRight{
+  0% {
+    transform: translateX(0%);
+  }     
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes windowCloseRight{
+  0% {
+    transform: translateX(100%);
+  }     
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes windowOpen {
+  0% {
+    transform: scaleX(0);
+    opacity: 0.2;
+  }
+    
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }   
+}
+
+@keyframes windowClose {
+  0% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+    
+  100% {
+    transform: scaleX(0);
+    opacity: 0;
+  }   
+}
