@@ -23,11 +23,22 @@ https://www.youtube.com/watch?v=JYHSoRM1TNE
 </ul>
 
 
-The gestures were coded using Javascript and CSS animations and div changes were applied using JQuery.
-<img src="images/Img3.jpg" alt="Image 3"/>
-
-First, there was a loop created to recognise if the hand was left or right:
+<p>The gestures were coded using Javascript and CSS animations and div changes were applied using JQuery.The Leap Motion software recognizes certain movement patterns as gestures which could indicate a user intent or command:
+<ul>
+<li>Swipe</li>
+<li>Circle</li>
+<li>Key Tap</li>
+<li>Screen Tap</li>
+</ul>
+You can customize these getures by adding time, direction, velocity, etc. First create a loop to recognize if the hand is left or right:</p>
 <img src="images/Img4.jpg" alt="Image 4"/>
 
+<p>After you get the hand's 'isLeft' or 'isRight' attribute, you can customize the gestures by getting the hand characterisitics like Palm Position, Palm Velocity and Palm Direction. Once a gesture is recognized, add or remove CSS animations using JQuery.</p>
+<img src="images/Img3.jpg" alt="Image 3"/>
 
-We hope that everyone will have an enjoyable experience using our Virtual Window! 
+We hope that everyone will have an enjoyable experience using our Virtual Window!
+<h1>References</h1>
+<ul>
+<li>https://developer.leapmotion.com/documentation/javascript/devguide/Leap_Gestures.html?proglang=javascript</li>
+<li>https://developer.leapmotion.com/documentation/javascript/devguide/Leap_Gestures.html?proglang=javascript</li>
+</ul>
