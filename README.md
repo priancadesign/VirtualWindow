@@ -40,5 +40,5 @@ We hope that everyone will have an enjoyable experience using our Virtual Window
 <h1>References</h1>
 <ul>
 <li>https://developer.leapmotion.com/documentation/javascript/devguide/Leap_Gestures.html?proglang=javascript</li>
-<li>https://developer.leapmotion.com/documentation/javascript/devguide/Leap_Gestures.html?proglang=javascript</li>
+<li>https://developer.leapmotion.com/explorations#110</li>
 </ul>
